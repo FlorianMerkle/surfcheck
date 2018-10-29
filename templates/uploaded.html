@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block title %} Display Uploaded File {% endblock %}
+{% block head %}
+{% endblock %}
+{% block body %}
+<h1> Thanks for contributing</h1>
+<img src="static/files/{{ unique_filename }}" id='upload' style="height:480px">
+
+<div class="form-group">
+	<form action="{{ url_for('confirm') }}" method="POST">
+		<input type='submit' value='submit'>
+	</form>
+</div>
+{% endblock%}

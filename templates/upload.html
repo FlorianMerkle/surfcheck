@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+{% block title %} Upload File here {% endblock %}
+{% block head %}  
+	<link rel="stylesheet" href="./static/preview.css">
+	<!-- Preview selected file -->
+	<script type="text/javascript">
+		
+	</script>
+	<style>
+		#preview{
+			margin-left: 2rem;
+			width: 20rem;
+			height: 20rem;
+			border: 2px solid #000000;
+		}
+			
+		#preview img{
+			max-width: 100%;
+			max-height: 100%;
+		}
+	</style>
+{% endblock %}
+
+{% block body %}
+	<div class="form-group">
+		<form action="{{ url_for('upload') }}" enctype="multipart/form-data" method="POST">
+			<input type="file" name="image" id="file-input" required="required">
+			<input type="submit" value="submit">
+		</form>
+	</div>
+	<div id="preview">
+		<img src="" alt="Upload preview" id='previewImg' >
+	</div>
+
+	<!-- EXIF orient preview -->
+	<script src="./static/preview.js"></script>
+
+{% endblock %}

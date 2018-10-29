@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block title %} Register {% endblock %}{% block head %}
+{% endblock %}
+{% block body %}
+<div class="d-flex w-100 " style="margin-top: 10vh;">
+<h5 class="m-auto col-5" style="color:white;">Register</h5>
+</div>
+<div class="d-flex w-100">
+<form action="/register" method="post" class="m-auto col-5 border-left" style="top: 5vh">
+    <div class="form-group">
+      <label for="inputEmail" style="color:white">Email</label>
+      <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Email">
+    </div>
+    <div class="form-group">
+      <label for="inputPassword" style="color:white">Password</label>
+      <input type="password" class="form-control" name="inputPassword" id="inputPassword" placeholder="Password">
+    </div>
+  <div class="form-group">
+    <label for="inputHomespot" style="color:white">Homespot </label><a style="color:grey"> - optional</a>
+    <input type="text" class="form-control" id="inputHomespot" placeholder="Homespot">
+  </div>
+  <button type="submit" class="btn">Sign up</button>
+</form>
+</div>
+{% endblock %}

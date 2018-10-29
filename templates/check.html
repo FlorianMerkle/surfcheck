@@ -1,0 +1,107 @@
+{% extends 'layout.html' %}
+{% block title %} Check your Spot {% endblock %}{% block head %}
+<style>
+.textbox-grey{
+  	background-color: #343a40;
+  	color:white;
+}
+
+.carousel{
+	height: 80%;
+	width: 100%;  	
+}
+.carousel-inner{
+	height: 100%;
+	width: 100%;
+}
+
+.carousel-item{
+	height: 100%;
+	width: 100%;
+}
+.carousel-img{
+	display: block;
+	max-width : 100%;
+  	max-height: 100%;
+  	height: auto;
+  	width: auto;
+  	margin: auto;
+
+}
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+}
+
+</style>{% endblock %}
+{% block body %}
+<div class= "card display-inline mx-4 my-4 textbox-grey border border-secondary row">
+	<p class="text-center col-sm-12 my-auto">
+		The conditions in {{recent_imgs[0]['spot_name']}} right now:<br>
+		Swell: {{current_data['swell']['components']["combined"]["height"]}} ft, {{current_data['swell_compass_direction']}} @ {{current_data['swell']['components']["combined"]["period"]}}s<br>
+		Wind: {{current_data['wind']['speed']}} km/h, {{current_data['wind_compass_direction']}}
+	</p>
+</div>
+<div class="card-deck my-4 mx-4">
+	<div class="card border border-secondary mb-3" style="max-height:70vh">
+		<div class="card-header textbox-grey border border-secondary">
+		    Most Recent Uploads
+		</div>
+		<div id="latestUploads" class="carousel slide card-img-bottom" data-ride="carousel">
+		  <div class="carousel-inner">
+			{% for recent_img in recent_imgs %}
+		    <div class="carousel-item{% if loop.index == 1 %} active{% endif %}" style="background:black">
+		      <img class="d-block mx-auto h-100 border border-secondary" src="static/files/{{recent_img['filename']}}" alt="recent image upload" style="height: 100% ; width: auto;">
+		      <div class="img-footer">
+			    <h5>{{recent_img['spot_name']}}</h5>
+			    <p>Swell: {{recent_img['combined_height']}} ft, {{recent_img['combined_direction']}} @ {{recent_img['combined_period']}}s</p>
+			    <p>Uploaded on: {{recent_img['timestamp']}}</p>
+			  </div>
+		    </div>
+		    {% endfor %}
+		  </div>
+		  <a class="carousel-control-prev" href="#latestUploads" role="button" data-slide="prev">
+		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		    <span class="sr-only">Previous</span>
+		  </a>
+		  <a class="carousel-control-next" href="#latestUploads" role="button" data-slide="next">
+		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		    <span class="sr-only">Next</span>
+		  </a>
+		</div>
+		<div class="card-body textbox-grey" style="">
+	    <p class="card-text">The three most recently uploaded images</p>
+	  </div>
+	</div>
+
+	<div class="card border border-secondary mb-3" style="max-height:70vh">
+		<div class="card-header textbox-grey border border-secondary">
+		    Similar Conditions
+		</div>
+		<div id="latestUploads" class="carousel slide card-img-bottom" data-ride="carousel">
+		  <div class="carousel-inner">
+		    <div class="carousel-item active" style="background:black">
+		    	<div style="height: 100%; width:100%">
+		      	<img class="d-block mx-auto h-100 border border-secondary" src="static/files/{{similar_image['filename']}}" alt="recent image upload" style="height: 100% ; width: auto;">
+	      		<div class="img-footer">
+				    <h5>{{recent_imgs[0]['spot_name']}}</h5>
+					<p>Swell: {{similar_image['combined_height']}} ft, {{similar_image['swell_compass_direction']}} @ {{similar_image['combined_period']}}s</p>
+				    <p>Uploaded on: {{similar_image['timestamp']}}</p>
+			  	</div>
+			  </div>
+		    </div>
+
+		  </div>
+		</div>
+		<div class="card-body textbox-grey" style="">
+	    <p class="card-text">Based on archived images and wave data: This is what you might expect</p>
+	  </div>
+	</div>
+
+</div>
+{% endblock %}
+
+
